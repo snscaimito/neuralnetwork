@@ -1,5 +1,7 @@
 package net.caimito;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class Neuron {
 	
 	private double inputWeight;
@@ -16,5 +18,10 @@ public class Neuron {
 
 	public double getOutputWeight() {
 		return outputWeight ;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this) ;
 	}
 }
