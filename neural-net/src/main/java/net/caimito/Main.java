@@ -5,7 +5,10 @@ public class Main {
 	private static NeuralNet network ;
 	
 	public static void main(String[] args) {
-		network = new NeuralNet(1, 2) ;
+		network = new NeuralNetworkBuilder()
+				.withHiddenLayers(1)
+				.withNeuronsPerLayer(2)
+				.build() ;
 		
 		printInputLayer() ;
 		printHiddenLayers() ;

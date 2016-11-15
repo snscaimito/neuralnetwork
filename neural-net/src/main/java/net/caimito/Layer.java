@@ -2,22 +2,26 @@ package net.caimito;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Layer {
 
 	private List<Neuron> neuronsInLayer = new ArrayList<>() ;
 	
-	public Layer(int numberOfNeurons) {
-		Random randomInputWeight = new Random() ;
-		Random randomOutputWeight = new Random() ;
-		
+	public Layer(int numberOfNeurons, SignalProcessingFunction function) {
 		for (int i=0; i < numberOfNeurons; i++)
-			neuronsInLayer.add(new Neuron(randomInputWeight.nextDouble(), randomOutputWeight.nextDouble())) ;
+			neuronsInLayer.add(Neuron.createRegularNeuron(function)) ;
 	}
 
 	public List<Neuron> getNeurons() {
 		return neuronsInLayer ;
+	}
+
+	public void connectTo(Layer otherLayer) {
+		for (Neuron neuronThisLayer : neuronsInLayer) {
+			for (Neuron neuronOtherLayer : otherLayer.getNeurons()) { 
+				neuronThisLayer.createDentriteConnection(neuronOtherLayer);
+			}
+		}
 	}
 
 }

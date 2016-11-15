@@ -12,7 +12,12 @@ public class NeuralNetTest {
 
 	@Test
 	public void createEmptyNetwork() {
-		NeuralNet network = new NeuralNet(0, 0);
+		NeuralNet network = new NeuralNetworkBuilder()
+				.withHiddenLayers(0)
+				.withNeuronsPerLayer(0)
+				.build() ;
+		
+		assertThat(network, is(instanceOf(NeuralNet.class))) ;
 
 		assertThat(network.getHiddenLayers(), emptyCollectionOf(Layer.class));
 		assertThat(network.getInputLayer(), is(instanceOf(Layer.class)));
@@ -21,7 +26,12 @@ public class NeuralNetTest {
 
 	@Test
 	public void initializeSingleLayerNetwork() {
-		NeuralNet network = new NeuralNet(1, 0);
+		NeuralNet network = new NeuralNetworkBuilder()
+				.withHiddenLayers(1)
+				.withNeuronsPerLayer(0)
+				.build() ;
+		
+		assertThat(network, is(instanceOf(NeuralNet.class))) ;
 
 		assertThat(network.getHiddenLayers().size(), is(1));
 		assertThat(network.getInputLayer(), is(instanceOf(Layer.class)));
@@ -30,7 +40,12 @@ public class NeuralNetTest {
 
 	@Test
 	public void initializeSingleLayerNetworkTwoNeurons() {
-		NeuralNet network = new NeuralNet(1, 2);
+		NeuralNet network = new NeuralNetworkBuilder()
+				.withHiddenLayers(1)
+				.withNeuronsPerLayer(2)
+				.build() ;
+		
+		assertThat(network, is(instanceOf(NeuralNet.class))) ;
 
 		assertThat(network.getInputLayer(), is(instanceOf(Layer.class)));
 		assertThat(network.getOutputLayer(), is(instanceOf(Layer.class)));
@@ -43,5 +58,5 @@ public class NeuralNetTest {
 		assertThat(network.getInputLayer().getNeurons().size(), is(2));
 		assertThat(network.getOutputLayer().getNeurons().size(), is(2));
 	}
-
+	
 }
